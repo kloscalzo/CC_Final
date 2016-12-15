@@ -94,7 +94,7 @@ var babyBB;
 var babyBBchirp;
 var xPosbBB = 300;
 var yPosbBB = 110;
-var xVelbBB = 4;
+var xVelbBB = 3.5;
 var yVelbBB = 4;
 var yDirbBB = 1;
 
@@ -109,16 +109,27 @@ var yVelTear2 = 3;
 
 //frameSix variables
 var landscape5;
+var squaking;
+var flapping;
 var lilWB;
 var xPosLWB = 620;
 var yPosLWB = 170;
-var xVelLWB = 6;
-var yVelLWB = 6;
+var xVelLWB = 4.5;
+var yVelLWB = 4.5;
 var dadWB;
 var xPosDWB = 325;
 var yPosDWB = 85;
 var yVelDWB = 2;
 var yDirDWB = 1;
+
+//frameSeven variables
+var landscape6;
+var momSpirit;
+var bbFly;
+var happyMoon;
+var xPosHM = 700;
+var yPosHM = 30;
+var yVelHM = 2.5;
 
 
 var index = 1; //each time user clicks the mouse, the index keeps track of which frame user is in (within the switch); thjs is what is changing
@@ -166,21 +177,25 @@ function preload() {
     scaredBabyBB = loadSound("assets/scaredBabyBB.wav");
 
     //frameSix assets
+    squaking = loadSound("assets/squaking.mp3");
+    flapping = loadSound("assets/wingsFlap.mp3");
     landscape5 = loadImage("assets/landscape5.png");
     lilWB = loadImage("assets/lilWB.png");
     dadWB = loadImage("assets/dadWB.png");
+    
+    //frameSeven assets
+    landscape6 = loadImage("assets/landscape6.png");
+    happyMoon = loadImage("assets/happyMoon.png");
 }
 
 function setup() {
     createCanvas(800, 500);
     frameRate(10);
-
     background(firstScreen);
     songP1.play();
 }
 
 function draw() {
-
     switch (index) {
         case 1:
             frameOne();
@@ -209,23 +224,13 @@ function draw() {
     }
 
     line(650, 0, 650, height);
-
 }
 
 function mousePressed() {
     console.log(mouseX);
 }
 
-if (mouseX == 500 && mouseY == 300) {
-    //when rect is clicked, change background
-    background(0);
-    fill(0, 255, 0);
-    ellipse(200, 200, frameCount);
-}
-
-
 function mouseClicked() {
-
     if (mouseX > 650) {
         index++;
 
@@ -258,10 +263,14 @@ function mouseClicked() {
             case 6:
                 scaredBabyBB.stop();
                 songP5.stop();
+                squaking.play();
+                flapping.play();
                 songInstru.play();
                 break;
             case 7:
-                songInstru().stop;
+                songInstru.stop();
+                squaking.stop();
+                flapping.stop();
                 songP7.play();
                 break;
             case 8:
@@ -272,9 +281,7 @@ function mouseClicked() {
     }
 }
 
-
 function frameOne() {
-
     if (frameCount > 30) {
         background(landscape1);
         image(bbWatchGlow, 207, 240);
@@ -366,19 +373,22 @@ function frameFive() {
 
 function frameSix() {
     background(landscape5);
+
     image(lilWB, xPosLWB, yPosLWB);
-    
+
+    xPosLWB -= xVelLWB; //go left
+    yPosLWB += yVelLWB; //go down
+
+    if (yPosLWB > 350) {
+        yPosLWB -= yVelLWB;
+    }
+
     image(dadWB, xPosDWB, yPosDWB);
-    
+
     yPosDWB += yVelDWB;
     if (yPosDWB < 75 || yPosDWB > 105) {
         yVelDWB *= -yDirDWB;
     }
-    
-//    xPosbBB += xVelbBB2; //go right
-//    yPosbBB -= yVelbBB2; //go down
-
-
 }
 
 function frameSeven() {
