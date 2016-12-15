@@ -1,8 +1,8 @@
 //Katharine LoScalzo
-//Creative Coding Final
-//December 2016
+//Creative Coding Final - December 2016
+//"The Bird Above", "Blackbird" by the Beatles
 
-//don't forget to use a server to get sound
+var arrow;
 
 //variables of song snippets
 var songP1;
@@ -43,8 +43,12 @@ var yPosTear = 243;
 var yVelTear = 6;
 var distantWB;
 var xPosdWB = 800;
-var yPosdWB = 50;
-var xVeldWB = 6;
+var yPosdWB = 90;
+var xVeldWB = 5.8;
+var birdECL;
+var xPosECL = 727;
+var yPosECL = 50;
+var xVelECL = 5.8;
 
 //frameThree variables
 var thunder;
@@ -53,17 +57,17 @@ var landscape2;
 var momBB;
 var xPosMom = 0;
 var yPosMom = 200;
-var xVelMom = 12;
+var xVelMom = 9;
 
 var whiteAngryB1;
 var xPosWAB1 = 800;
 var yPosWAB1 = 100;
-var xVelWAB1 = 11;
+var xVelWAB1 = 13;
 
 var whiteAngryB3;
 var xPosWAB3 = 450;
 var yPosWAB3 = 300;
-var xVelWAB3 = 9;
+var xVelWAB3 = 10;
 
 var rain;
 var xPosRain = 200;
@@ -124,12 +128,30 @@ var yDirDWB = 1;
 
 //frameSeven variables
 var landscape6;
+
 var momSpirit;
+var xPosMS = 0;
+var yPosMS = 10;
+var yVelMS = 1;
+var yDirMS = 1;
+
 var bbFly;
+var xPosBBF = 210;
+var yPosBBF = 180;
+var yVelBBF = 2;
+var yDirBBF = 1;
+
 var happyMoon;
-var xPosHM = 700;
-var yPosHM = 30;
-var yVelHM = 2.5;
+var xPosHM = 650;
+var yPosHM = 0;
+var yVelHM = 1;
+
+//frameEight variables
+var landscape7;
+var bbEnd;
+var xPosBBE = 0;
+var yPosBBE = 25;
+var xVelBBE = 6;
 
 
 var index = 1; //each time user clicks the mouse, the index keeps track of which frame user is in (within the switch); thjs is what is changing
@@ -143,6 +165,7 @@ function preload() {
     songInstru = loadSound("assets/songP6_instru.mp3");
     songP7 = loadSound("assets/songP7.mp3");
     songP8 = loadSound("assets/songP8.mp3");
+    arrow = loadImage("assets/arrow.png");
 
     //frameOne assets
     firstScreen = loadImage("assets/firstScreen.png");
@@ -157,6 +180,7 @@ function preload() {
     landscape1CU = loadImage("assets/landscape1_CU.png");
     tear = loadImage("assets/tear.png");
     distantWB = loadImage("assets/distantWB.png");
+    birdECL = loadImage("assets/birdECL.png");
 
     //frameThree assets
     thunder = loadSound("assets/thunder.wav");
@@ -182,10 +206,16 @@ function preload() {
     landscape5 = loadImage("assets/landscape5.png");
     lilWB = loadImage("assets/lilWB.png");
     dadWB = loadImage("assets/dadWB.png");
-    
+
     //frameSeven assets
     landscape6 = loadImage("assets/landscape6.png");
+    momSpirit = loadImage("assets/momSpirit.png");
+    bbFly = loadImage("assets/bbFly.png");
     happyMoon = loadImage("assets/happyMoon.png");
+
+    //frameEight
+    landscape7 = loadImage("assets/landscape7.png");
+    bbEnd = loadImage("assets/bbEnd.png");
 }
 
 function setup() {
@@ -193,6 +223,7 @@ function setup() {
     frameRate(10);
     background(firstScreen);
     songP1.play();
+    image(arrow, 740, 250, 50,50);
 }
 
 function draw() {
@@ -223,7 +254,7 @@ function draw() {
             break;
     }
 
-    line(650, 0, 650, height);
+    image(arrow, 740, 250, 50,50);
 }
 
 function mousePressed() {
@@ -274,7 +305,7 @@ function mouseClicked() {
                 songP7.play();
                 break;
             case 8:
-                songP7().stop;
+                songP7.stop();
                 songP8.play();
                 break;
         }
@@ -282,7 +313,8 @@ function mouseClicked() {
 }
 
 function frameOne() {
-    if (frameCount > 30) {
+    if (frameCount > 44) {
+        image(arrow, 700, 250);
         background(landscape1);
         image(bbWatchGlow, 207, 240);
 
@@ -306,10 +338,12 @@ function frameTwo() {
 
     image(tear, xPosTear, yPosTear);
     image(distantWB, xPosdWB, yPosdWB);
-
+    image(birdECL, xPosECL, yPosECL);
+    
     //call animation / motion logic
     yPosTear += yVelTear;
     xPosdWB -= xVeldWB;
+    xPosECL -= xVelECL;
 }
 
 function frameThree() {
@@ -392,20 +426,31 @@ function frameSix() {
 }
 
 function frameSeven() {
-    background(255);
-    fill(255, 255, 0);
-    rect(300, 300, 50, 50);
+    background(landscape6);
 
+    image(momSpirit, xPosMS, yPosMS);
+    yPosMS += yVelMS;
+    if (yPosMS < 11 || yPosMS > 40) {
+        yVelMS *= -yDirMS;
+    }
+
+    image(bbFly, xPosBBF, yPosBBF);
+    yPosBBF += yVelBBF;
+    if (yPosBBF < 180 || yPosBBF > 210) {
+        yVelBBF *= -yDirBBF;
+    }
+
+    image(happyMoon, xPosHM, yPosHM);
+    yPosHM += yVelHM;
+    if (yPosHM > 37) {
+        yPosHM = 37;
+    }
 }
 
 function frameEight() {
-    background(255);
-    fill(255, 255, 0);
-    rect(300, 300, 50, 50);
+
+    background(landscape7);
+    image(bbEnd, xPosBBE, yPosBBE);
+    xPosBBE += xVelBBE;
 
 }
-
-
-
-
-//    if(frameCount - timeSnapshot < 150){
