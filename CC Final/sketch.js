@@ -14,7 +14,7 @@ var songInstru;
 var songP7;
 var songP8;
 
-//frameOne images
+//frameOne variables
 var firstScreen;
 var landscape1; //first landscape background
 var bbWatchGlow; //glowing black bird PNG
@@ -34,7 +34,7 @@ var yPosmN3 = 180;
 var xVelmN3 = 2.4; //x velocity of musicNote3
 var yVelmN3 = 2.4;
 
-//frameTwo images
+//frameTwo variables
 var landscape1CU;
 var bbSadGlow;
 var tear;
@@ -46,7 +46,8 @@ var xPosdWB = 800;
 var yPosdWB = 50;
 var xVeldWB = 6;
 
-//frameThree images
+//frameThree variables
+var thunder;
 var landscape2;
 var momBB;
 var xPosMom = 0;
@@ -75,16 +76,25 @@ var yPosRain3 = 170;
 var yVelRain3 = 4;
 var xPosRain4 = 100;
 var yPosRain4 = 105;
-var yVelRain4 = 6;
+var yVelRain4 = 12;
 var xPosRain5 = 350;
 var yPosRain5 = 205;
 var yVelRain5 = 6;
 var xPosRain8 = 730;
 var yPosRain8 = 190;
-var yVelRain8 = 4;
+var yVelRain8 = 10;
 var xPosRain7 = 200;
 var yPosRain7 = 205;
-var yVelRain7 = 2;
+var yVelRain7 = 3.5;
+
+//frameFour variables
+var landscape3;
+var babyBB;
+var babyBBchirp;
+var xPosbBB = 300;
+var yPosbBB = 110;
+var yVelbBB = 4;
+var yDirbBB = 1;
 
 var index = 1; //each time user clicks the mouse, the index keeps track of which frame user is in (within the switch); thjs is what is changing
 
@@ -113,11 +123,20 @@ function preload() {
     distantWB = loadImage("assets/distantWB.png");
 
     //frameThree assets
+    thunder = loadSound("assets/thunder.wav");
     landscape2 = loadImage("assets/landscape2.png");
     momBB = loadImage("assets/momBB.png");
     whiteAngryB1 = loadImage("assets/whiteBirdangry.png");
     whiteAngryB3 = loadImage("assets/whiteBirdangry3.png");
     rain = loadImage("assets/tear.png");
+
+    //frameFour assets
+    babyBBchirp = loadSound("assets/babyBBchirp.mp3");
+    landscape3 = loadImage("assets/landscape3.png");
+    babyBB = loadImage("assets/babyBB.png");
+    
+    //frameFive assets
+    landscape4 = loadImage("assets/landscape4.png");
 }
 
 function setup() {
@@ -188,12 +207,16 @@ function mouseClicked() {
             case 3:
                 songP2.stop();
                 songP3.play();
+                thunder.play();
                 break;
             case 4:
+                thunder.stop();
+                babyBBchirp.play();
                 songP3.stop();
                 songP4.play();
                 break;
             case 5:
+                babyBBchirp.stop();
                 songP4.stop();
                 songP5.play();
                 break;
@@ -250,31 +273,51 @@ function frameTwo() {
 
 function frameThree() {
     background(landscape2);
-    
+
     image(momBB, xPosMom, yPosMom);
     xPosMom += xVelMom;
-    
+
     image(whiteAngryB1, xPosWAB1, yPosWAB1);
     xPosWAB1 -= xVelWAB1;
     image(whiteAngryB3, xPosWAB3, yPosWAB3);
     xPosWAB3 -= xVelWAB3;
-    
+
     image(rain, xPosRain, yPosRain);
-//    image(rain, xPosRain2, yPosRain2);
-//    image(rain, xPosRain3, yPosRain3);
+    yPosRain += yVelRain;
+
+    image(rain, xPosRain2, yPosRain2);
+    yPosRain2 += yVelRain2;
+
+    image(rain, xPosRain3, yPosRain3);
+    yPosRain3 += yVelRain3;
+
+    image(rain, xPosRain4, yPosRain4);
+    yPosRain4 += yVelRain4;
+
+    image(rain, xPosRain5, yPosRain5);
+    yPosRain5 += yVelRain5;
+
+    image(rain, xPosRain8, yPosRain8);
+    yPosRain8 += yVelRain8;
+
+    image(rain, xPosRain7, yPosRain7);
+    yPosRain7 += yVelRain7;
 }
 
 function frameFour() {
-    background(255);
-    fill(255, 255, 0);
-    rect(300, 300, 50, 50);
+    background(landscape3);
 
+    image(babyBB, xPosbBB, yPosbBB);
+    yPosbBB -= yVelbBB;
+
+    if (yPosbBB < 80 || yPosbBB > 110) {
+        yVelbBB *= -yDirbBB;
+    }
 }
 
 function frameFive() {
-    background(255);
-    fill(255, 255, 0);
-    rect(300, 300, 50, 50);
+    background(landscape4);
+    yPosbBB -= yVelbBB;
 
 }
 
