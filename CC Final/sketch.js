@@ -48,6 +48,7 @@ var xVeldWB = 6;
 
 //frameThree variables
 var thunder;
+var hawkScream;
 var landscape2;
 var momBB;
 var xPosMom = 0;
@@ -93,8 +94,32 @@ var babyBB;
 var babyBBchirp;
 var xPosbBB = 300;
 var yPosbBB = 110;
+var xVelbBB = 4;
 var yVelbBB = 4;
 var yDirbBB = 1;
+
+//frameFive variables
+var scaredBabyBB;
+var landscape4;
+var xVelbBB2 = 5.5;
+var yVelbBB2 = 5.5;
+var xPosTear2 = 670;
+var yPosTear2 = 105;
+var yVelTear2 = 3;
+
+//frameSix variables
+var landscape5;
+var lilWB;
+var xPosLWB = 620;
+var yPosLWB = 170;
+var xVelLWB = 6;
+var yVelLWB = 6;
+var dadWB;
+var xPosDWB = 325;
+var yPosDWB = 85;
+var yVelDWB = 2;
+var yDirDWB = 1;
+
 
 var index = 1; //each time user clicks the mouse, the index keeps track of which frame user is in (within the switch); thjs is what is changing
 
@@ -124,6 +149,7 @@ function preload() {
 
     //frameThree assets
     thunder = loadSound("assets/thunder.wav");
+    hawkScream = loadSound("assets/hawkScream.wav");
     landscape2 = loadImage("assets/landscape2.png");
     momBB = loadImage("assets/momBB.png");
     whiteAngryB1 = loadImage("assets/whiteBirdangry.png");
@@ -134,9 +160,15 @@ function preload() {
     babyBBchirp = loadSound("assets/babyBBchirp.mp3");
     landscape3 = loadImage("assets/landscape3.png");
     babyBB = loadImage("assets/babyBB.png");
-    
+
     //frameFive assets
     landscape4 = loadImage("assets/landscape4.png");
+    scaredBabyBB = loadSound("assets/scaredBabyBB.wav");
+
+    //frameSix assets
+    landscape5 = loadImage("assets/landscape5.png");
+    lilWB = loadImage("assets/lilWB.png");
+    dadWB = loadImage("assets/dadWB.png");
 }
 
 function setup() {
@@ -208,19 +240,23 @@ function mouseClicked() {
                 songP2.stop();
                 songP3.play();
                 thunder.play();
+                hawkScream.play();
                 break;
             case 4:
                 thunder.stop();
+                hawkScream.stop();
                 babyBBchirp.play();
                 songP3.stop();
                 songP4.play();
                 break;
             case 5:
                 babyBBchirp.stop();
+                scaredBabyBB.play();
                 songP4.stop();
                 songP5.play();
                 break;
             case 6:
+                scaredBabyBB.stop();
                 songP5.stop();
                 songInstru.play();
                 break;
@@ -255,7 +291,6 @@ function frameOne() {
         xPosmN3 += xVelmN3;
         yPosmN3 -= yVelmN3;
     }
-
 }
 
 function frameTwo() {
@@ -269,7 +304,6 @@ function frameTwo() {
     yPosTear += yVelTear;
     xPosdWB -= xVeldWB;
 }
-
 
 function frameThree() {
     background(landscape2);
@@ -317,14 +351,33 @@ function frameFour() {
 
 function frameFive() {
     background(landscape4);
-    yPosbBB -= yVelbBB;
+    image(babyBB, xPosbBB, yPosbBB);
 
+    xPosbBB += xVelbBB2; //go right
+    yPosbBB -= yVelbBB2; //go down
+
+    if (yPosbBB < 80 || xPosbBB < 315) {
+        yVelbBB2 *= -yDirbBB;
+    }
+
+    image(tear, xPosTear2, yPosTear2);
+    yPosTear2 += yVelTear2;
 }
 
 function frameSix() {
-    background(255);
-    fill(255, 255, 0);
-    rect(300, 300, 50, 50);
+    background(landscape5);
+    image(lilWB, xPosLWB, yPosLWB);
+    
+    image(dadWB, xPosDWB, yPosDWB);
+    
+    yPosDWB += yVelDWB;
+    if (yPosDWB < 75 || yPosDWB > 105) {
+        yVelDWB *= -yDirDWB;
+    }
+    
+//    xPosbBB += xVelbBB2; //go right
+//    yPosbBB -= yVelbBB2; //go down
+
 
 }
 
