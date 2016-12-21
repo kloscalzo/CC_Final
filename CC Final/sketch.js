@@ -157,14 +157,14 @@ var xVelBBE = 6;
 var index = 1; //each time user clicks the mouse, the index keeps track of which frame user is in (within the switch); thjs is what is changing
 
 function preload() {
-    songP1 = loadSound("assets/songP1.mp3");
-    songP2 = loadSound("assets/songP2.mp3");
-    songP3 = loadSound("assets/songP3.mp3");
-    songP4 = loadSound("assets/songP4.mp3");
-    songP5 = loadSound("assets/songP5.mp3");
-    songInstru = loadSound("assets/songP6_instru.mp3");
-    songP7 = loadSound("assets/songP7.mp3");
-    songP8 = loadSound("assets/songP8.mp3");
+    songP1 = loadSound("assets/songP1.mp3"); //The Beatles'
+    songP2 = loadSound("assets/songP2.mp3"); //The Beatles'
+    songP3 = loadSound("assets/songP3.mp3"); //The Beatles'
+    songP4 = loadSound("assets/songP4.mp3"); //The Beatles'
+    songP5 = loadSound("assets/songP5.mp3"); //The Beatles'
+    songInstru = loadSound("assets/songP6_instru.mp3"); //The Beatles'
+    songP7 = loadSound("assets/songP7.mp3"); //The Beatles'
+    songP8 = loadSound("assets/songP8.mp3"); //The Beatles'
     arrow = loadImage("assets/arrow.png");
 
     //frameOne assets
@@ -183,8 +183,8 @@ function preload() {
     birdECL = loadImage("assets/birdECL.png");
 
     //frameThree assets
-    thunder = loadSound("assets/thunder.wav");
-    hawkScream = loadSound("assets/hawkScream.wav");
+    thunder = loadSound("assets/thunder.wav"); //from freesound.org
+    hawkScream = loadSound("assets/hawkScream.wav"); //from freesound.org
     landscape2 = loadImage("assets/landscape2.png");
     momBB = loadImage("assets/momBB.png");
     whiteAngryB1 = loadImage("assets/whiteBirdangry.png");
@@ -192,7 +192,7 @@ function preload() {
     rain = loadImage("assets/tear.png");
 
     //frameFour assets
-    babyBBchirp = loadSound("assets/babyBBchirp.mp3");
+    babyBBchirp = loadSound("assets/babyBBchirp.mp3"); //from freesound.org
     landscape3 = loadImage("assets/landscape3.png");
     babyBB = loadImage("assets/babyBB.png");
 
@@ -201,8 +201,8 @@ function preload() {
     scaredBabyBB = loadSound("assets/scaredBabyBB.wav");
 
     //frameSix assets
-    squaking = loadSound("assets/squaking.mp3");
-    flapping = loadSound("assets/wingsFlap.mp3");
+    squaking = loadSound("assets/squaking.mp3"); //from biblesound.com
+    flapping = loadSound("assets/wingsFlap.mp3"); //from biblesound.com
     landscape5 = loadImage("assets/landscape5.png");
     lilWB = loadImage("assets/lilWB.png");
     dadWB = loadImage("assets/dadWB.png");
